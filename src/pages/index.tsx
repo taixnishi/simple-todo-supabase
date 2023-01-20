@@ -1,23 +1,23 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import { useEffect, useState } from "react";
+import { FormEventHandler, useEffect, useState } from "react";
 import { deleteColorModeInLocalStorage } from "@/ui/theme";
-import {
-  Box,
-  Flex,
-  Heading,
-  Input,
-  Stack,
-  StackDivider,
-  Text,
-  Icon,
-  IconButton,
-  Spacer,
-} from "@chakra-ui/react";
-import { BiCheckCircle } from "react-icons/bi";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { Box, Input } from "@chakra-ui/react";
 
-const tasks = [
+import { Task } from "@/components/molecules/Task";
+import { TaskList } from "@/components/organisms/TaskList";
+import { Header } from "@/components/molecules/Header";
+import { InputTaskForm } from "@/components/organisms/InputTaskForm";
+
+interface Task {
+  id: string;
+  uid: string;
+  text: string;
+  isDone: boolean;
+  createdAt: string;
+}
+
+const taskList: Task[] = [
   {
     id: "cbwodcbodsc",
     uid: "cecbceiw61",
@@ -54,6 +54,19 @@ export default function Home() {
   //   setTimeout(deleteColorModeInLocalStorage, 3000);
   // }, []);
 
+  // const addTask = (event) => {
+  //   if (event.key === "Enter") {
+  //     console.log((event.target as HTMLInputElement).value);
+  //     (event.target as HTMLInputElement).value = "";
+  //   }
+  // };
+
+  // const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  //   event.preventDefault();
+  //   const { value: task } = (event.target as any).task;
+  //   console.log(task);
+  //   (event.target as any).task.value = "";
+  // };
   return (
     <>
       <Head>
@@ -63,101 +76,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Heading mb={20}>
-          TodoApp&nbsp;By&nbsp;
-          <Text as="span" color="green.400">
-            Supabase
-          </Text>
-        </Heading>
-
-        <Stack divider={<StackDivider />} spacing="4" w="600px">
-          <Flex>
-            <IconButton
-              aria-label="checkCircle"
-              color={tasks[0].isDone ? "green.700" : "gray.500"}
-              variant="ghost"
-              mr={4}
-              isRound
-            >
-              <Icon as={BiCheckCircle} w={6} h={6} />
-            </IconButton>
-            <Box>
-              <Heading size="sm">猫ちゃんとお昼寝</Heading>
-              <Text fontSize="sm" color="gray.500">
-                2022/1/21
-              </Text>
-            </Box>
-            <Spacer />
-            <IconButton
-              color="red.700"
-              aria-label="delete"
-              variant="ghost"
-              isRound
-              onClick={() => alert("本当に削除してもいいですか？")}
-            >
-              <DeleteIcon w={5} h={5} />
-            </IconButton>
-          </Flex>
-
-          <Flex>
-            <IconButton
-              aria-label="checkCircle"
-              color={tasks[1].isDone ? "green.700" : "gray.600"}
-              variant="ghost"
-              isRound
-              mr={4}
-            >
-              <Icon as={BiCheckCircle} w={6} h={6} />
-            </IconButton>
-            <Box>
-              <Heading size="sm">猫ちゃんとお昼寝</Heading>
-              <Text fontSize="sm" color="gray.500">
-                2022/1/21
-              </Text>
-            </Box>
-            <Spacer />
-            <IconButton
-              color="red.700"
-              aria-label="delete"
-              variant="ghost"
-              isRound
-              onClick={() => alert("本当に削除してもいいですか？")}
-            >
-              <DeleteIcon w={5} h={5} />
-            </IconButton>
-          </Flex>
-
-          <Flex>
-            <IconButton
-              aria-label="checkCircle"
-              color={tasks[2].isDone ? "green.700" : "gray.600"}
-              variant="ghost"
-              isRound
-              mr={4}
-            >
-              <Icon as={BiCheckCircle} w={6} h={6} />
-            </IconButton>
-            <Box>
-              <Heading size="sm">猫ちゃんとお昼寝</Heading>
-              <Text fontSize="sm" color="gray.500">
-                2022/1/21
-              </Text>
-            </Box>
-            <Spacer />
-            <IconButton
-              color="red.700"
-              aria-label="delete"
-              variant="ghost"
-              isRound
-              onClick={() => alert("本当に削除してもいいですか？")}
-            >
-              <DeleteIcon w={5} h={5} />
-            </IconButton>
-          </Flex>
-        </Stack>
-
+        <Header />
+        <TaskList taskList={taskList} />
         <Box pos="fixed" zIndex={10} bottom="20">
-          <Input placeholder="新しいタスクを入力..." w="600px" />
+          <InputTaskForm />
         </Box>
       </main>
     </>
