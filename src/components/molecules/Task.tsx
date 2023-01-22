@@ -1,32 +1,27 @@
-import { FC } from "react";
-import { Box, Flex, Heading, Spacer, Text } from "@chakra-ui/react";
+import { FC } from 'react';
+import { Box, Flex, Heading, Spacer, Text } from '@chakra-ui/react';
 
-import { CheckButton } from "@/components/atoms/CheckButton";
-import { DeleteButton } from "@/components/atoms/DeleteButton";
-
-interface Task {
-  id: string;
-  uid: string;
-  text: string;
-  isDone: boolean;
-  createdAt: string;
-}
+import { CheckButton } from '@/components/atoms/CheckButton';
+import { DeleteButton } from '@/components/atoms/DeleteButton';
+import { taskIF } from '@/types/type';
+import { formatTimeToYMD } from 'utils/dayjs';
 
 type TaskProps = {
-  task: Task;
+  task: taskIF;
 };
 
 export const Task: FC<TaskProps> = ({ task }) => {
-  const { text, createdAt, isDone } = task;
+  const { content, is_done, created_at } = task;
+  console.log(task);
   return (
     <Flex>
       <Box mr={2}>
-        <CheckButton isDone={false} />
+        <CheckButton isDone={is_done} />
       </Box>
       <Box>
-        <Heading size="sm">{text}</Heading>
+        <Heading size="sm">{content}</Heading>
         <Text fontSize="sm" color="gray.500">
-          2022/1/21
+          {formatTimeToYMD(created_at)}
         </Text>
       </Box>
       <Spacer />
