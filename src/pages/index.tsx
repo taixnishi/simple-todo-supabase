@@ -1,6 +1,21 @@
-import { FormEventHandler, useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useState, FormEvent } from 'react';
 import { deleteColorModeInLocalStorage } from '@/ui/theme';
-import { Box } from '@chakra-ui/react';
+import {
+  Box,
+  FormControl,
+  Input,
+  Stack,
+  FormLabel,
+  FormHelperText,
+  Button,
+  Spacer,
+  Text,
+  Link,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+} from '@chakra-ui/react';
 import { NextPage, GetStaticProps, GetServerSideProps } from 'next';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -9,6 +24,8 @@ import { TaskList } from '@/components/organisms/TaskList';
 import { InputTaskForm } from '@/components/organisms/InputTaskForm';
 import { taskIF } from '@/types/type';
 import { Layout } from '@/components/layout/Layout';
+import { useMutateAuth } from '@/hooks/useMutateAuth';
+import { CheckIcon, SettingsIcon } from '@chakra-ui/icons';
 
 // const taskList: taskIF[] = [
 //   {
@@ -41,44 +58,110 @@ import { Layout } from '@/components/layout/Layout';
 //   },
 // ];
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  console.log('getServerSideProps/ssr invoked');
-  const { data: tasks } = await supabase
-    .from('todos')
-    .select('*')
-    .order('created_at', { ascending: true });
-  console.log(tasks);
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   console.log('getServerSideProps/ssr invoked');
+//   const { data: tasks } = await supabase
+//     .from('todos')
+//     .select('*')
+//     .order('created_at', { ascending: true });
+//   console.log(tasks);
 
-  return {
-    props: {
-      tasks,
-    },
+//   return {
+//     props: {
+//       tasks,
+//     },
+//   };
+// };
+
+// type StaticProps = {
+//   tasks: taskIF[];
+// };
+const Home: NextPage = () => {
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loginMutation,
+    registerMutation,
+  } = useMutateAuth();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isLogin) {
+      loginMutation.mutate();
+    } else {
+      registerMutation.mutate();
+    }
   };
-};
-
-type StaticProps = {
-  tasks: taskIF[];
-};
-const Home: NextPage<StaticProps> = ({ tasks }) => {
   // After 3s reset the localStorage
   // useEffect(() => {
   //   setTimeout(deleteColorModeInLocalStorage, 3000);
   // }, []);
-  const [taskList, setTaskList] = useState([]);
+  // const [taskList, setTaskList] = useState([]);
 
-  useEffect(() => {
-    // const { data: tasks } = await supabase
-    //   .from('todos')
-    //   .select('*')
-    //   .order('created_at', { ascending: true });
-  }, []);
+  // useEffect(() => {
+  //   // const { data: tasks } = await supabase
+  //   //   .from('todos')
+  //   //   .select('*')
+  //   //   .order('created_at', { ascending: true });
+  // }, []);
 
   return (
+    // <Layout>
+    //   <TaskList taskList={} />
+    //   <Box pos="fixed" zIndex={10} bottom="20">
+    //     <InputTaskForm />
+    //   </Box>
+    // </Layout>
+
     <Layout>
-      <TaskList taskList={tasks} />
-      <Box pos="fixed" zIndex={10} bottom="20">
-        <InputTaskForm />
-      </Box>
+      <Card variant="outline">
+        <CardHeader>
+          <Heading textAlign="center" size="md">
+            {isLogin ? 'Login Form' : 'Signup Form'}
+          </Heading>
+        </CardHeader>
+        <CardBody>
+          <form onSubmit={handleSubmit}>
+            <Stack spacing={4}>
+              <Input
+                placeholder="Emailを入力"
+                w="300px"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <Input
+                placeholder="Passwordを入力"
+                w="300px"
+                type="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+
+              <Text
+                cursor="pointer"
+                textAlign="center"
+                onClick={() => {
+                  setIsLogin((prev) => !prev);
+                }}
+              >
+                <SettingsIcon mr={2} />
+                change mode ?
+              </Text>
+              <Button isLoading={false} type="submit">
+                <CheckIcon mr={2} />
+                {isLogin ? 'Login' : 'SignUp'}
+              </Button>
+            </Stack>
+          </form>
+        </CardBody>
+      </Card>
     </Layout>
   );
 };

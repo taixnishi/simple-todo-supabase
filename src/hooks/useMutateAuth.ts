@@ -10,6 +10,11 @@ export const useMutateAuth = () => {
     setPassword('');
   };
 
+  /**
+   * useMutationの使い方
+   *  const 〇〇〇〇Mutation = useMutaion(データ更新関数, オプション);
+   */
+
   const loginMutation = useMutation(
     async () => {
       const { error } = await supabase.auth.signInWithPassword({
@@ -25,5 +30,29 @@ export const useMutateAuth = () => {
       },
     }
   );
-  return {};
+
+  const registerMutation = useMutation(
+    async () => {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      if (error) throw new Error(error.message);
+    },
+    {
+      onError: (err: any) => {
+        alert(err.message);
+        reset();
+      },
+    }
+  );
+
+  return {
+    email,
+    setEmail,
+    password,
+    setPassword,
+    loginMutation,
+    registerMutation,
+  };
 };
