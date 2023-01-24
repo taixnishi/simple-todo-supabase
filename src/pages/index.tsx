@@ -15,6 +15,7 @@ import {
   CardBody,
   CardHeader,
   Heading,
+  CardFooter,
 } from '@chakra-ui/react';
 import { NextPage, GetStaticProps, GetServerSideProps } from 'next';
 import { supabase } from '../../utils/supabaseClient';
@@ -25,7 +26,7 @@ import { InputTaskForm } from '@/components/organisms/InputTaskForm';
 import { taskIF } from '@/types/type';
 import { Layout } from '@/components/layout/Layout';
 import { useMutateAuth } from '@/hooks/useMutateAuth';
-import { CheckIcon, SettingsIcon } from '@chakra-ui/icons';
+import { CheckIcon, SettingsIcon, WarningIcon } from '@chakra-ui/icons';
 
 // const taskList: taskIF[] = [
 //   {
@@ -161,6 +162,13 @@ const Home: NextPage = () => {
             </Stack>
           </form>
         </CardBody>
+        <CardFooter>
+          <WarningIcon mr={1} color="red.300" />
+          <Text maxW="300px" fontSize="xs" textAlign="center">
+            Emailの確認オプションをオフにしています。
+            <br />そのためダミーメールでサインインできます。
+          </Text>
+        </CardFooter>
       </Card>
     </Layout>
   );
