@@ -35,6 +35,7 @@ const Home: NextPage = () => {
       registerMutation.mutate();
     }
   };
+  // INFO: ChakraUIのthemeはlocalstorageに保存される
   // After 3s reset the localStorage
   // useEffect(() => {
   //   setTimeout(deleteColorModeInLocalStorage, 3000);

@@ -4,9 +4,10 @@ import { BiCheckCircle } from 'react-icons/bi';
 
 type CheckButtonProps = {
   isDone: boolean;
-  onClickEvent: () => void
+  onClickEvent: () => void;
 };
 
+// TODO: is_doneの状態管理について考える
 export const CheckButton: FC<CheckButtonProps> = ({ isDone, onClickEvent }) => {
   return (
     <IconButton

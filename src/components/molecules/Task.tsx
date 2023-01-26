@@ -1,15 +1,5 @@
 import { FC } from 'react';
-import {
-  Box,
-  Center,
-  Editable,
-  EditableInput,
-  EditablePreview,
-  Flex,
-  Tooltip,
-  Spacer,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Center, Flex, Tooltip, Spacer, Text } from '@chakra-ui/react';
 
 import { CheckButton } from '@/components/atoms/CheckButton';
 import { DeleteButton } from '@/components/atoms/DeleteButton';
@@ -29,9 +19,7 @@ export const Task: FC<Omit<taskIF, 'user_id'>> = ({
     result && deleteTaskMutation.mutate(id);
   };
   const handleToggeleCheckIcon = (id: string, is_done: boolean): void => {
-    const data = toggeleTaskMutation.mutate({ id, is_done });
-    console.log('conponent toggele', data);
-    // alert('handleToggeleCheckIcon is done');
+    toggeleTaskMutation.mutate({ id, is_done });
   };
   return (
     <Flex>
@@ -42,7 +30,10 @@ export const Task: FC<Omit<taskIF, 'user_id'>> = ({
         />
       </Center>
       <Box>
-        <Tooltip placement='bottom-end' label={content}>
+        <Tooltip placement="bottom-end" label={content}>
+          {/*TODO: テキストが省略された場合のみToolTipsを変更するようにする
+           * https://www.gaji.jp/blog/2021/10/29/8430/
+           */}
           <Text
             fontSize="lg"
             maxW="500px"

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { FC, ReactNode } from 'react';
 import { Header } from '../molecules/Header';
-import { Button, Icon, IconButton } from '@chakra-ui/react';
+import { Button, Icon } from '@chakra-ui/react';
 import { MdOutlineLogout } from 'react-icons/md';
 import { supabase } from 'utils/supabaseClient';
 import { useRouter } from 'next/router';
