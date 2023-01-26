@@ -1,11 +1,24 @@
-import { FormEventHandler, FC } from "react";
-import { Input } from "@chakra-ui/react";
+import { FormEventHandler, FC } from 'react';
+import { Input } from '@chakra-ui/react';
+import { useMutateTask } from '@/hooks/query/useMutateTask';
+import { supabase } from 'utils/supabaseClient';
 
 export const InputTaskForm: FC = () => {
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const { createTaskMutation } = useMutateTask();
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    const { value: task } = (event.target as any).task;
-    (event.target as any).task.value = "";
+    const { value: content } = (event.target as any).content;
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log('user data', user);
+    createTaskMutation.mutate({
+      content: content,
+      user_id: user?.id,
+    });
+    (event.target as any).content.value = '';
   };
 
   return (
@@ -13,9 +26,9 @@ export const InputTaskForm: FC = () => {
       <Input
         placeholder="新しいタスクを入力..."
         w="600px"
-        name="task"
+        name="content"
         defaultValue=""
-        />
+      />
     </form>
   );
 };

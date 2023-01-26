@@ -5,3 +5,5 @@ export interface taskIF {
   is_done: boolean;
   created_at: Date;
 }
+
+export type editedTaskType = Omit<taskIF, 'created_at' | 'user_id' | 'is_done'>;

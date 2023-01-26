@@ -2,11 +2,20 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { FC, ReactNode } from 'react';
 import { Header } from '../molecules/Header';
+import { Button, Icon, IconButton } from '@chakra-ui/react';
+import { MdOutlineLogout } from 'react-icons/md';
+import { supabase } from 'utils/supabaseClient';
+import { useRouter } from 'next/router';
 
 type LayoutProps = {
   children: ReactNode;
 };
 export const Layout: FC<LayoutProps> = ({ children }) => {
+  const signout = async () => {
+    await supabase.auth.signOut();
+  };
+
+  const { pathname } = useRouter();
   return (
     <>
       <Head>
@@ -16,6 +25,20 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        {pathname !== '/' && (
+          <Button
+            onClick={signout}
+            pos="fixed"
+            zIndex={10}
+            top="10"
+            right="10%"
+            aria-label="logout button"
+            variant="ghost"
+          >
+            <Icon as={MdOutlineLogout}  />
+            Logout
+          </Button>
+        )}
         <Header />
         {children}
       </main>
