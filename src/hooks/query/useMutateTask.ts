@@ -8,7 +8,6 @@ export const useMutateTask = () => {
 
   const createTaskMutation = useMutation(
     async (task: Omit<taskIF, 'id' | 'is_done' | 'created_at'>) => {
-      console.log('createTaskMutation start');
       const { data, error } = await supabase
         .from('todos')
         .insert(task)
@@ -25,7 +24,6 @@ export const useMutateTask = () => {
         reset();
       },
       onError: (err: any) => {
-        console.log('createTaskMutation error', err.message);
         alert(err.message);
         reset();
       },
@@ -55,7 +53,6 @@ export const useMutateTask = () => {
         reset();
       },
       onError: (err: any) => {
-        console.log('updateTaskMutation error', err.message);
         alert(err.message);
         reset();
       },
@@ -69,7 +66,6 @@ export const useMutateTask = () => {
         .update({ is_done: !payload.is_done })
         .eq('id', payload.id)
         .select();
-      console.log('update task data', data);
       if (error) throw new Error(error.message);
       return data;
     },
@@ -86,7 +82,6 @@ export const useMutateTask = () => {
         }
       },
       onError: (err: any) => {
-        console.log('toggeleTaskMutation error', err.message);
         alert(err.message);
       },
     }
@@ -109,13 +104,11 @@ export const useMutateTask = () => {
           const newTasks = previousTasks.filter(
             (task) => task.id !== variables
           );
-          console.log('newTasks', newTasks);
           queryClient.setQueryData(['todos'], newTasks);
         }
         reset();
       },
       onError: (err: any) => {
-        console.log('deleteTaskMutation error', err.message);
         alert(err.message);
         reset();
       },
