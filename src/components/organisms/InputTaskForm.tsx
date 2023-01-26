@@ -13,7 +13,6 @@ export const InputTaskForm: FC = () => {
       data: { user },
     } = await supabase.auth.getUser();
 
-    console.log('user data', user);
     createTaskMutation.mutate({
       content: content,
       user_id: user?.id,
