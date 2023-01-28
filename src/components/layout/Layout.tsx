@@ -2,14 +2,22 @@ import Head from 'next/head';
 import styles from '@/styles/Home.module.css';
 import { FC, ReactNode } from 'react';
 import { Header } from '../molecules/Header';
-import { Button, Icon } from '@chakra-ui/react';
+import { Box, Button, Container, Icon } from '@chakra-ui/react';
 import { MdOutlineLogout } from 'react-icons/md';
 import { supabase } from 'utils/supabaseClient';
 import { useRouter } from 'next/router';
+import styled from '@emotion/styled';
 
 type LayoutProps = {
   children: ReactNode;
 };
+
+// display: flex;
+// flex-direction: column;
+// align-items: center;
+const S_Container = styled(Container)`
+  min-height: 100vh;
+`;
 export const Layout: FC<LayoutProps> = ({ children }) => {
   const signout = async () => {
     await supabase.auth.signOut();
@@ -24,23 +32,26 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        {pathname !== '/' && (
-          <Button
-            onClick={signout}
-            pos="fixed"
-            zIndex={10}
-            top="10"
-            right="10%"
-            aria-label="logout button"
-            variant="ghost"
-          >
-            <Icon as={MdOutlineLogout}  />
-            Logout
-          </Button>
-        )}
-        <Header />
-        {children}
+      <main>
+        <S_Container centerContent pt={20}>
+          {pathname !== '/' && (
+            <Button
+              onClick={signout}
+              pos="fixed"
+              zIndex={10}
+              top={['5', '10']}
+              right="10%"
+              aria-label="logout button"
+              variant="ghost"
+              fontSize={[16, 20]}
+            >
+              <Icon as={MdOutlineLogout} />
+              Logout
+            </Button>
+          )}
+          <Header />
+          {children}
+        </S_Container>
       </main>
     </>
   );

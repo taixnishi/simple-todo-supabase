@@ -35,16 +35,18 @@ export const Task: FC<Omit<taskIF, 'user_id'>> = ({
            * https://www.gaji.jp/blog/2021/10/29/8430/
            */}
           <Text
-            fontSize="lg"
+            fontSize={[16, 18, 20]}
+            color={is_done ? 'gray.500' : 'white'}
             maxW="500px"
             overflow="hidden"
             textOverflow="ellipsis"
             whiteSpace="nowrap"
+            textDecorationLine={is_done ? 'line-through' : 'none'}
           >
             {content}
           </Text>
         </Tooltip>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize={[12, 14, 16]} color="gray.500">
           {formatTimeToYMD(created_at)}
         </Text>
       </Box>

@@ -21,7 +21,25 @@ export const TaskList: FC = () => {
       </Text>
     );
   return (
-    <Stack divider={<StackDivider />} spacing="4" w="600px">
+    <Stack
+      divider={<StackDivider />}
+      spacing={[2, 3]}
+      maxW="600px"
+      w={[300, 450, 600]}
+      maxH="460px"
+      overflow="auto"
+      sx={{
+        '&::-webkit-scrollbar': {
+          width: '5px',
+          borderRadius: '10px',
+          backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        },
+        '&::-webkit-scrollbar-thumb': {
+          borderRadius: '10px',
+          backgroundColor: `#4A5568`,
+        },
+      }}
+    >
       {data?.map((task: taskIF) => (
         <Task key={task.id} {...task} />
       ))}

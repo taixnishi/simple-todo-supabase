@@ -24,7 +24,8 @@ export const InputTaskForm: FC = () => {
     <form onSubmit={handleSubmit}>
       <Input
         placeholder="新しいタスクを入力..."
-        w="600px"
+        maxW="600px"
+        w={[300, 450, 600]}
         name="content"
         defaultValue=""
       />
