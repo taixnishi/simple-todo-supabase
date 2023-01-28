@@ -87,6 +87,48 @@ export const useMutateTask = () => {
     }
   );
 
+  // TODO: 完了ステータスはキャッシュの更新を行い高速化する。
+  // キャッシュの有効期限が切れた場合に現在の値でsupabaseの更新を行う
+  // const toggeleTaskMutation = useMutation(
+  //   async (payload: Omit<taskIF, 'user_id' | 'created_at' | 'content'>) => {
+  //     const previousTasks = queryClient.getQueryData<taskIF[]>(['todos']);
+  //     if (previousTasks) {
+  //       queryClient.setQueryData(
+  //         ['todos'],
+  //         previousTasks.map((task) => {
+  //           return task.id === payload.id
+  //             ? { ...task, is_done: !payload.is_done }
+  //             : task;
+  //         })
+  //       );
+  //     }
+
+      // const { data, error } = await supabase
+      //   .from('todos')
+      //   .update({ is_done: !payload.is_done })
+      //   .eq('id', payload.id)
+      //   .select();
+      // if (error) throw new Error(error.message);
+      // return data;
+    // }
+    // {
+    //   onSuccess: (res, variables) => {
+    //     const previousTasks = queryClient.getQueryData<taskIF[]>(['todos']);
+    //     if (previousTasks) {
+    //       queryClient.setQueryData(
+    //         ['todos'],
+    //         previousTasks.map((task) => {
+    //           return task.id === variables.id ? res[0] : task;
+    //         })
+    //       );
+    //     }
+    //   },
+    //   onError: (err: any) => {
+    //     alert(err.message);
+    //   },
+    // }
+  // );
+
   const deleteTaskMutation = useMutation(
     async (id: string) => {
       const { data, error } = await supabase
