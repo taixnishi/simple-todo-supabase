@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is SimpleTodoApp with Supabase
+
+![todo-supabase-loginform](https://user-images.githubusercontent.com/66266385/215318425-01d6a8ac-5997-4c74-9552-72fd8b47b867.png)
+![todo-supabase-dashboard](https://user-images.githubusercontent.com/66266385/215318415-9eead8c1-64c4-4cef-a24d-1e1cc51c7986.png)
 
 ## Getting Started
 
