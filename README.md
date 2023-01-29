@@ -1,7 +1,12 @@
 This is SimpleTodoApp with Supabase
 
+Produt URL is [here](https://simple-todo-supabase-3vew8gax7-taixnishi.vercel.app)
+
 ![todo-supabase-loginform](https://user-images.githubusercontent.com/66266385/215318425-01d6a8ac-5997-4c74-9552-72fd8b47b867.png)
 ![todo-supabase-dashboard](https://user-images.githubusercontent.com/66266385/215318415-9eead8c1-64c4-4cef-a24d-1e1cc51c7986.png)
+
+## アーキテクチャ
+![todo-supabase-アーキテクチャ](https://user-images.githubusercontent.com/66266385/215321939-29caa1a3-08b1-44ab-8f60-d5a545327666.jpg)
 
 ## Getting Started
 
