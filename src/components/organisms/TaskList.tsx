@@ -26,7 +26,7 @@ export const TaskList: FC = () => {
       spacing={{ base: 1, md: 2, lg: 3 }}
       maxW="600px"
       w={{ base: 300, md: 450, lg: 600 }}
-      maxH={{base: 400, md: 450}}
+      height={{ base: '60vh' , md: '50vh'}}
       overflow="auto"
       sx={{
         '&::-webkit-scrollbar': {
