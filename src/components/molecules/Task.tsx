@@ -35,7 +35,8 @@ export const Task: FC<Omit<taskIF, 'user_id'>> = ({
            * https://www.gaji.jp/blog/2021/10/29/8430/
            */}
           <Text
-            fontSize={[16, 18, 20]}
+            // fontSize={[16, 18, 20]}
+            fontSize={{ base: 16, md: 18, lg: 20 }}
             color={is_done ? 'gray.500' : 'white'}
             maxW="500px"
             overflow="hidden"
@@ -46,7 +47,7 @@ export const Task: FC<Omit<taskIF, 'user_id'>> = ({
             {content}
           </Text>
         </Tooltip>
-        <Text fontSize={[12, 14, 16]} color="gray.500">
+        <Text fontSize={{ base: 12, md: 14, lg: 16 }} color="gray.500">
           {formatTimeToYMD(created_at)}
         </Text>
       </Box>

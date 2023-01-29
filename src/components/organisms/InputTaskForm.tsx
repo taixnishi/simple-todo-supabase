@@ -25,7 +25,7 @@ export const InputTaskForm: FC = () => {
       <Input
         placeholder="新しいタスクを入力..."
         maxW="600px"
-        w={[300, 450, 600]}
+        w={{ base: 300, md: 450, lg: 600 }}
         name="content"
         defaultValue=""
       />

@@ -23,10 +23,10 @@ export const TaskList: FC = () => {
   return (
     <Stack
       divider={<StackDivider />}
-      spacing={[2, 3]}
+      spacing={{ base: 1, md: 2, lg: 3 }}
       maxW="600px"
-      w={[300, 450, 600]}
-      maxH="460px"
+      w={{ base: 300, md: 450, lg: 600 }}
+      maxH={{base: 400, md: 450}}
       overflow="auto"
       sx={{
         '&::-webkit-scrollbar': {
@@ -46,3 +46,10 @@ export const TaskList: FC = () => {
     </Stack>
   );
 };
+// const breakpoints = {
+//   sm: '30em', 480px
+//   md: '48em', 768px
+//   lg: '62em', 992px
+//   xl: '80em', 1280px
+//   '2xl': '96em', 1536
+// }

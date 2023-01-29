@@ -33,17 +33,17 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <S_Container centerContent pt={20}>
+        <S_Container centerContent pt={{base: 10, md: 20}}>
           {pathname !== '/' && (
             <Button
               onClick={signout}
               pos="fixed"
               zIndex={10}
-              top={['5', '10']}
+              top={{base: 1, md: 10}}
               right="10%"
               aria-label="logout button"
               variant="ghost"
-              fontSize={[16, 20]}
+              fontSize={{base: 16, md: 20}}
             >
               <Icon as={MdOutlineLogout} />
               Logout

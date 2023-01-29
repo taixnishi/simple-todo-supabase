@@ -8,7 +8,7 @@ const dashboard: NextPage = () => {
   return (
     <Layout>
       <TaskList />
-      <Box pos="fixed" zIndex={10} bottom="20">
+      <Box pos="fixed" zIndex={10} bottom={{ base: 5, sm: 10, md: 20 }}>
         <InputTaskForm />
       </Box>
     </Layout>
