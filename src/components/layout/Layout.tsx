@@ -7,6 +7,7 @@ import { MdOutlineLogout } from 'react-icons/md';
 import { supabase } from 'utils/supabaseClient';
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
+import { useQueryClient } from 'react-query';
 
 type LayoutProps = {
   children: ReactNode;
@@ -19,8 +20,10 @@ const S_Container = styled(Container)`
   min-height: 100vh;
 `;
 export const Layout: FC<LayoutProps> = ({ children }) => {
+  const queryClient = useQueryClient();
   const signout = async () => {
     await supabase.auth.signOut();
+    queryClient.removeQueries(['todos']);
   };
 
   const { pathname } = useRouter();
@@ -33,17 +36,17 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <S_Container centerContent pt={{base: 10, md: 20}}>
+        <S_Container centerContent pt={{ base: 10, md: 20 }}>
           {pathname !== '/' && (
             <Button
               onClick={signout}
               pos="fixed"
               zIndex={10}
-              top={{base: 1, md: 10}}
+              top={{ base: 1, md: 10 }}
               right="10%"
               aria-label="logout button"
               variant="ghost"
-              fontSize={{base: 16, md: 20}}
+              fontSize={{ base: 16, md: 20 }}
             >
               <Icon as={MdOutlineLogout} />
               Logout
